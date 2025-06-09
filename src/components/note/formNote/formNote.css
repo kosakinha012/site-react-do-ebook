@@ -1,0 +1,36 @@
+
+.aside-notes {
+  background-color: cyan;
+  width: 400px;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#formNote {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 10px;
+  width: 80%;
+  height: 100vh;
+}
+.margin-form {
+  margin-bottom: 5px;
+}
+#buttonForm {
+  background-color: purple;
+  color: white;
+  border: none;
+  height: 40px;
+  border-radius: 6px;
+  margin-top: 30px;
+}
+#buttonForm:hover {
+  background-color: blueviolet;
+  cursor: pointer;
+}
+#formNote label {
+  font-size: 1.4rem;
+}
+
