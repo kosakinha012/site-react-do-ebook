@@ -7,45 +7,72 @@ import { styled } from '@mui/material/styles';
 const NoteContainer = styled('div')(({ theme }) => ({
   backgroundColor: '#0A0A0A',
   border: '1px solid #00BFFF',
-  borderRadius: '8px',
-  padding: '20px',
+  borderRadius: 8,
+  padding: 20,
   position: 'relative',
   color: '#FFFFFF',
   boxShadow: '0 4px 6px rgba(0, 191, 255, 0.2)',
   transition: 'all 0.3s ease',
   '&:hover': {
     transform: 'translateY(-3px)',
-    boxShadow: '0 6px 12px rgba(0, 191, 255, 0.3)'
-  }
+    boxShadow: '0 6px 12px rgba(0, 191, 255, 0.3)',
+  },
+  minWidth: 400,
+  marginTop:50
 }));
 
-const Title = styled('div')({
-  fontSize: '1.2rem',
+const Title = styled('h3')({
+  fontSize: '1.3rem',
   fontWeight: 'bold',
-  marginBottom: '10px',
-  color: '#00BFFF'
+  marginBottom: 10,
+  color: '#00BFFF',
+  wordBreak: 'break-word',
 });
 
-const Description = styled('div')({
-  marginBottom: '15px',
-  lineHeight: '1.4'
+const Description = styled('p')({
+  marginBottom: 15,
+  lineHeight: 1.5,
+  whiteSpace: 'pre-wrap', // mantém quebras de linha do texto
+  color: '#ccc',
+  maxHeight: 120,
+  overflow: 'hidden',
+  textOverflow: 'ellipsis',
 });
 
 const DateText = styled('div')({
-  fontSize: '0.8rem',
-  color: '#888',
-  textAlign: 'right'
+  fontSize: '0.75rem',
+  color: '#666',
+  textAlign: 'right',
+  fontStyle: 'italic',
 });
 
-const ActionButton = styled('div')({
+const ActionButton = styled('button')({
   position: 'absolute',
+  top: 15,
+  padding: 6,
+  borderRadius: 5,
+  border: 'none',
+  backgroundColor: 'transparent',
   cursor: 'pointer',
-  padding: '5px',
-  borderRadius: '4px',
-  transition: 'all 0.2s ease',
+  transition: 'background-color 0.2s ease',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
   '&:hover': {
-    backgroundColor: 'rgba(0, 191, 255, 0.1)'
-  }
+    backgroundColor: 'rgba(0, 191, 255, 0.1)',
+  },
+  '&:focus': {
+    outline: 'none',
+    boxShadow: '0 0 0 2px #00BFFF',
+  },
+});
+
+const EditButton = styled(ActionButton)({
+  right: 50,
+});
+
+const DeleteButton = styled(ActionButton)({
+  right: 15,
 });
 
 function Note({ title, description, date, id }) {
@@ -61,23 +88,15 @@ function Note({ title, description, date, id }) {
     <NoteContainer>
       <Title>{title}</Title>
       <Description>{description}</Description>
-      
-      <ActionButton 
-        style={{ top: '15px', right: '45px' }} 
-        onClick={SubmitToEdit}
-        title="Edit note"
-      >
+
+      <EditButton onClick={SubmitToEdit} title="Editar nota" aria-label="Editar nota">
         <BiSolidEdit fontSize={23} color="#00BFFF" />
-      </ActionButton>
-      
-      <ActionButton 
-        style={{ top: '15px', right: '15px' }} 
-        onClick={() => deleteNote(id)}
-        title="Delete note"
-      >
+      </EditButton>
+
+      <DeleteButton onClick={() => deleteNote(id)} title="Excluir nota" aria-label="Excluir nota">
         <BsFillTrashFill fontSize={23} color="#FF3D3D" />
-      </ActionButton>
-      
+      </DeleteButton>
+
       <DateText>{date}</DateText>
     </NoteContainer>
   );

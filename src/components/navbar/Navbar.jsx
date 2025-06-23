@@ -16,7 +16,7 @@ import { styled } from '@mui/material/styles';
 import { useDispatch } from 'react-redux';
 import DrawerComponent from "../drawer/drawreCompent";
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-
+import "./Navbar.css"
 const pages = ['Home', 'Products', 'Blog'];
 const settings = ['Cart', 'logout'];
 
@@ -110,8 +110,8 @@ function Navbar() {
                 >
                   <ShoppingCartIcon 
                     sx={{ 
-                      width: 40, 
-                      height: 40,
+                      width: 30, 
+                      height: 30,
                       borderRadius: '50%',
                       padding: 1,
                       backgroundColor: 'rgba(255, 255, 255, 0.1)'

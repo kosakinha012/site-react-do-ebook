@@ -2,20 +2,20 @@ import {generateAtualDate} from"../helpers/generateAtualDate"
 
 export const mockNotes = [
   {
-    title: "one piece é demais",
-    description: "pirata que estica",
+    title: "Matheus Ferreira",
+    description: "Um ótimo site",
     id: "1",
     date: generateAtualDate(),
   },
   {
-    title: "tomates",
-    description: "melhor fruta ever",
+    title: "Matheus Rabelo",
+    description: "Gostei do visual",
     id: "2",
     date: generateAtualDate(),
   },
   {
-    title: "Volei",
-    description: "é o melhor esporte",
+    title: "Fábio Reis",
+    description: "Gostei da variedade de livros",
     id: "3",
     date: generateAtualDate(),
   },

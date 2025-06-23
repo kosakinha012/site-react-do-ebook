@@ -103,9 +103,9 @@ function Produtos() {
   useEffect(() => {
     if (!loading) {
       if (error) {
-        showAndHidePopup(`Error: ${error}`, 'error');
-      } else if (bookData) {
-        showAndHidePopup('Ebook encontrado!', 'success');
+        showAndHidePopup(`Erro: ${error}`, 'error');
+      } else if (bookData && bookData.length > 0) {
+        showAndHidePopup('Ebook(s) encontrado(s)!', 'success');
       }
     }
   }, [loading, error, bookData]);
@@ -131,17 +131,16 @@ function Produtos() {
       </SearchContainer>
 
       {loading && <LoadingText>Carregando...</LoadingText>}
-
       {error && <ErrorText>Erro ao buscar livro</ErrorText>}
 
-      {Array.isArray(bookData) ? (
+      {bookData && bookData.length > 0 ? (
         <CardsContainer>
           {bookData.map((a) => (
-            <EbookCard key={a.id} {...a} />
+            <EbookCard key={a.id} valor={a.valor} {...a} />
           ))}
         </CardsContainer>
       ) : (
-        bookData && <NoResultsText>Nenhum livro encontrado</NoResultsText>
+        !loading && <NoResultsText>Nenhum livro encontrado</NoResultsText>
       )}
 
       {showPopup && (

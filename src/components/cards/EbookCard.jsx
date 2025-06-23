@@ -65,23 +65,27 @@ const TechButton = styled(Button)({
 
 export default function EbookCard(props) {
   const dispatch = useDispatch();
+  const { volumeInfo, valor } = props;
 
   return (
     <TechCard>
       <TechCardHeader
-        title={props.volumeInfo.title}
+        title={volumeInfo.title}
       />
       <TechCardMedia
         component="img"
-        image={props.volumeInfo.imageLinks?.thumbnail || '/placeholder-book-cover.png'}  
-        alt={props.volumeInfo.title}
+        image={volumeInfo.imageLinks?.thumbnail || '/placeholder-book-cover.png'}  
+        alt={volumeInfo.title}
         onError={(e) => {
           e.target.src = '/placeholder-book-cover.png';
         }}
       />
       <TechCardContent>
+        <Typography variant="body2" sx={{ fontWeight: 'bold', color: '#00FF7F' }}>
+          Valor: {valor ? `R$ ${valor}` : 'Preço não disponível'}
+        </Typography>
         <Typography variant="body2">
-          {props.volumeInfo.description || 'No description available.'}
+          {volumeInfo.description || 'Sem descrição disponível.'}
         </Typography>
       </TechCardContent>
       

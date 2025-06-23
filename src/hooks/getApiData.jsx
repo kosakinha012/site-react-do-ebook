@@ -1,7 +1,5 @@
 import axios from 'axios';
-import React from 'react'
-import { useEffect } from 'react';
-import { useState } from 'react'
+import React, { useEffect, useState } from 'react';
 
 export function useGetApiData(book) {
     const [bookData, setBookData] = useState(null);
@@ -10,26 +8,32 @@ export function useGetApiData(book) {
 
     useEffect(() => {
         async function fetchData() {
-            setLoading(true)
-            setError(false)
+            setLoading(true);
+            setError(false);
+
             try {
-                const response = await axios.get(`https://www.googleapis.com/books/v1/volumes?q=${book}`)
+                const query = book.trim() ? book : "Harry Potter"; // corrigido nome e lógica
+                const response = await axios.get(`https://www.googleapis.com/books/v1/volumes?q=${query}`);
 
                 if (response.status === 200) {
-                    setBookData(response.data.items);
+                    // Adiciona um valor fictício a cada livro
+                    const booksWithValue = response.data.items.map(item => ({
+                        ...item,
+                        valor: (Math.random() * 100).toFixed(2) // valor aleatório entre 0 e 100
+                    }));
+
+                    setBookData(booksWithValue);
                 } else {
-                    setError('Failed to fetch data');
+                    setError('Falha ao buscar os dados');
                 }
             } catch (error) {
-                setError(error.message)
+                setError(error.message);
             } finally {
                 setLoading(false);
             }
-        } if (!book.trim()) {
-            book = "Harry Poter"
         }
-        fetchData()
 
+        fetchData();
     }, [book]);
 
     return { bookData, loading, error };
